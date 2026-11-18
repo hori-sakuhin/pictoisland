@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>プロフィール編集｜PictoIsland</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pref_edit.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="prof-edit">
+
+  <h2>プロフィール編集</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+
+    <div id="username">
+      <label>ユーザー名</label><br>
+      <input type="text" name="username" class="usernametext" value="{{ user.username }}">
+    </div>
+
+    <div id="usericon">
+      <label id="icon">アイコン画像</label>
+      <input type="file" name="icon">
+    </div>
+
+    <div id="usercomment">
+      <label id="comment">一言コメント</label>
+      <textarea name="comment">{{ user.comment }}</textarea>
+    </div>
+
+    <div id="islandname">
+      <label>島の名前</label>
+      <input type="text" name="island_name" value="{{ user.island_name }}">
+    </div>
+
+    <div id="island-theme">
+      <label>島のテーマ</label>
+      <input type="text" name="island_theme" value="{{ user.island_theme }}">
+    </div>
+
+
+    <div class="form-group">
+      <label>アカウント公開設定</label>
+
+      <div>
+        <label>
+          <input type="radio" name="is_public" value="1"
+            {% if user.is_public == 1 %}checked{% endif %}>
+          公開
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="radio" name="is_public" value="0"
+            {% if user.is_public == 0 %}checked{% endif %}>
+          非公開
+        </label>
+      </div>
+    </div>
+
+
+
+    <button type="submit">保存</button>
+
+
+
+
+  </form>
+
+
+  <a href="{{ url_for('prof', user_id=user['id']) }}">← プロフィールに戻る</a>
+
+</div>
+
+</body>
+</html>

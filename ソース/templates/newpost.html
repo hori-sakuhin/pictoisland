@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規投稿</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/newpost.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <linkrel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <main class="atelier">
+
+        <h1 class="title">今日の1枚を投稿しよう</h1>
+
+        <form method="POST" enctype="multipart/form-data" class="post-card">
+
+            <input type="file" name="image" id="fileInput" hidden>
+
+            <label for="fileInput" class="upload-area">
+                <div class="icon"></div>
+                <p>クリックして画像をえらぶ</p>
+                <span class="sub">あなたの島の作品を飾ろう</span>
+            </label>
+
+            <button type="submit" class="post-btn">
+                投稿する
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('home_page') }}" class="back-link">
+            ← ホームへもどる
+        </a>
+
+    </main>
+        
+</body>
+</html>

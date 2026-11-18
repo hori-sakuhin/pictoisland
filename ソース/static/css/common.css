@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+body {
+  margin: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;  background-color: #f5f7f6;
+  color: #333;
+  background-image: url("../images/umi.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 10px 20px;
+  margin-left: 0;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: #eef3f2;
+  background: rgba(180, 150, 255, 0.35);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 5px 0 25px rgba(150, 120, 255, 0.2);
+  align-items: center;
+}
+
+
+.logo {
+  font-size: 35px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.icon{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 40px;
+}
+
+.icon i{
+  display: grid;
+  font-size: 2.5rem;
+  color: #333;
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  padding: 10px 30px 50px 50px ;
+  margin-left: 250px;
+}
+.usernav{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-top: 30px;
+  margin-left: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  gap: 12px;
+}
+
+.usernav a {
+  display: inline-block;
+  padding: 14px 22px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  text-decoration: none;
+  color: #6a3df0;
+  font-weight: bold;
+  transition: 0.25s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+
+.usernav a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+#islandSelect {
+  padding: 20px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+}
+.bizyubutton{
+    display: inline-block;
+    padding: 10px 0px;
+    margin: 0;
+    width: 300px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #6a3df0;
+    font-weight: bold;
+    text-align: center;
+}
+
+#bizyu{
+  display: flex;
+
+}
+
+

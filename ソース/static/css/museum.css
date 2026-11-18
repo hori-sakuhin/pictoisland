@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+body{
+    background-image: url("../images/museumnai.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+#title {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+}
+
+#title h2 {
+  display: inline-block;
+  color: #000;
+  font-weight: bold;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  backdrop-filter: blur(6px);
+}
+
+.museum-img {
+    width: 400px;
+    border-radius: 20px;
+}
+
+.arrow {
+    font-size: 50px;
+    text-decoration: none;
+    margin: 40px;
+}
+
+.disabled {
+    color: gray;
+    pointer-events: none;
+}
+
+.museum-container {
+    text-align: center;
+}
+
+.museum-frame {
+    width: 570px;
+    height: 370px;
+    margin: 5px auto;
+    margin-top: 47px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.museum-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.museum-date {
+  margin-top: 35px;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #6b5e55;
+  font-weight: 500;
+}
+.homehe {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+.homehe a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+
+.homehe a:hover {
+    background-color: #eee;
+}
+
+
+
+
+
+
+
+

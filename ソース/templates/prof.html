@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ホーム｜PictoIsland</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/prof.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="home">
+
+    <aside class="sidebar">
+      <h2 class="logo">PictoIsland</h2>
+
+      <nav class="icon">
+        <a href="{{ url_for('home_page') }}"><i class="fa-solid fa-house"></i></a>
+        <a href="{{ url_for('search_page') }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="{{ url_for('group_page') }}"><i class="fa-solid fa-users"></i></a>
+
+        {% if session.get('user_id') %}
+          <a href="{{ url_for('prof', user_id=session.get('user_id')) }}">
+            <i class="fa-regular fa-user"></i>
+          </a>
+        {% endif %}
+      </nav>
+    </aside>
+
+    <main class="main">
+
+
+      <div class="profile-wrapper">
+
+        <section class="account">
+
+          <div class="profile-top">
+
+            <div class="usericon">
+              {% if user['icon_path'] %}
+                <img src="{{ url_for('static', filename=user['icon_path']) }}">
+              {% endif %}
+            </div>
+
+
+            <div class="profile-info">
+
+              <div class="username-row">
+                <p class="name">{{ user['username'] }}</p>
+
+                {% if session.get("user_id") == user["id"] %}
+                  {% if user.is_public == 1 %}
+                    <i class="fa-solid fa-lock-open lock-icon public"></i>
+                  {% else %}
+                    <i class="fa-solid fa-lock lock-icon private"></i>
+                  {% endif %}
+                {% else %}
+                  <form method="POST"
+                        action="{{ url_for('follow', user_id=user['id']) }}">
+                    <button type="submit" class="follow-btn">
+                      {% if is_following %}
+                        フォロー中
+                      {% else %}
+                        フォローする
+                      {% endif %}
+                    </button>
+                  </form>
+                {% endif %}
+              </div>
+
+              <p class="comment">
+                {{ user['comment'] if user['comment'] else "一言コメントはまだありません" }}
+              </p>
+
+              <div class="friend">
+                <span onclick="toggleFollowList()">
+                  フォロー中 {{ follow_count }}
+                </span>
+
+                <span onclick="toggleFollowerList()">
+                  フォロワー {{ follower_count }}
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="followList" class="list-box" style="display:none;">
+            {% for f in follow_users %}
+              <p>
+                <a href="{{ url_for('prof', user_id=f.id) }}">
+                  {{ f.username }}
+                </a>
+              </p>
+            {% endfor %}
+          </div>
+
+          <div id="followerList" class="list-box" style="display:none;">
+            {% for f in follower_users %}
+              <p>
+                <a href="{{ url_for('prof', user_id=f.id) }}">
+                  {{ f.username }}
+                </a>
+              </p>
+            {% endfor %}
+          </div>
+
+
+          <section class="undercon">
+            <h2>島のテーマ</h2>
+            <p>#{{ user.island_theme }}</p>
+          </section>
+
+          <div class="btn">
+            {% if session.get("user_id") == user["id"] %}
+              <a href="{{ url_for('prof_edit') }}" class="edit-link">
+                プロフィール編集
+              </a>
+            {% endif %}
+
+            <a href="/home.html?user_id={{ user.id }}{% if request.args.get('from_group') %}&from_group={{ request.args.get('from_group') }}{% endif %}" class="island-btn">
+              この島を見る
+            </a>
+            {% if request.args.get('from_page') == 'search' %}
+              <a href="{{ url_for('search') }}" class="island-btn">← 検索に戻る</a>
+            {% endif %}
+
+
+          </div>
+        </section>
+
+
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleFollowList() {
+      const el = document.getElementById("followList");
+      if (el.style.display === "" || el.style.display === "none") {
+        el.style.display = "block";
+      } else {
+        el.style.display = "none";
+      }
+    }
+
+    function toggleFollowerList() {
+      const el = document.getElementById("followerList");
+      if (el.style.display === "" || el.style.display === "none") {
+        el.style.display = "block";
+      } else {
+        el.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>

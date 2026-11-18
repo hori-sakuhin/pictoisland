@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ホーム｜PictoIsland</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="home">
+
+    <aside class="sidebar">
+      <h2 class="logo">PictoIsland</h2>
+
+      <nav class="icon">
+        <a href="{{ url_for('home_page') }}"><i class="fa-solid fa-house"></i></a>
+        <a href="{{ url_for('search_page') }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="{{ url_for('group_page') }}"><i class="fa-solid fa-users"></i></a>
+        <a href="{{ url_for('prof', user_id=session['user_id']) }}"><i class="fa-regular fa-user"></i></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+
+      <form method="GET" action="{{ url_for('search_page') }}" class="search-form">
+        <input type="text" name="keyword"
+              value="{{ keyword }}"
+              placeholder="ユーザー名で検索">
+        <button type="submit">検索</button>
+      </form>
+
+      <div class="result-area">
+      {% for user in users %}
+        <div class="user-card">
+
+          <div class="user-icon">
+            {% if user.icon_path %}
+              <img src="{{ url_for('static', filename=user.icon_path) }}">
+            {% else %}
+              <div class="no-icon"></div>
+            {% endif %}
+          </div>
+
+          <div class="user-info">
+            <a href="{{ url_for('prof', user_id=user.id, from_search=keyword) }}" class="username">
+              {{ user.username }}
+            </a>
+
+            <div class="island-name">
+              島の名前： {{ user.island_name }}島
+            </div>
+
+            <div class="island-theme">
+              島のテーマ： {{ user.island_theme }}
+            </div>
+          </div>
+
+          {% if my_id != user.id %}
+          <form method="POST" action="{{ url_for('follow', user_id=user.id) }}">
+
+            {% if user.is_following == 1 %}
+              <button type="submit" class="follow-btn following">
+                フォロー中
+              </button>
+            {% else %}
+              <button type="submit" class="follow-btn">
+                フォローする
+              </button>
+            {% endif %}
+
+          </form>
+          {% endif %}
+        </div>
+      {% endfor %}
+      </div>
+
+      <div class="recommend-section">
+        <h2 class="section-title">今日のおすすめの島</h2>
+
+        <div class="card-container">
+          {% for user in recommend_users %}
+          <div class="island-card">
+            <img src="{{ url_for('static', filename=user.icon_path or 'uploads/default.png') }}">
+            <h3>{{ user.island_name }}島</h3>
+            <p>#{{ user.island_theme }}</p>
+            <a href="{{ url_for('prof', user_id=user.id) }}">
+              <button>プロフィールを見る</button>
+            </a>
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+
+
+
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/house.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+<main class="room">
+
+    <div class="wall-area">
+        <div class="frame">
+            {% if today_post %}
+                <img src="{{ url_for('static', filename=today_post.image_path) }}">
+            {% elif house_image %}
+                <img src="{{ url_for('static', filename=house_image) }}">
+            {% else %}
+                <p class="no-image">まだ作品がありません</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="actions">
+        <form method="POST" enctype="multipart/form-data">
+            
+            <input type="file" name="house_image" id="fileInput" hidden>
+
+            <label for="fileInput" class="custom-file-btn">
+                <i class="fa-solid fa-image"></i> 画像を選択
+            </label>
+
+
+            <button type="submit">＋ 家の画像を変更</button>
+        </form>
+
+        <a href="{{ url_for('home_page') }}" class="back-btn">ホームへ</a>
+    </div>
+
+</main>
+</body>
+</html>

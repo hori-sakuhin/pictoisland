@@ -1,0 +1,105 @@
+@charset "utf-8";
+
+
+.home {
+  display: flex;
+  height: 100vh;
+
+}
+
+
+
+h1{
+  margin: 0px;
+  padding: 0px;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #000;
+  text-shadow: 0 6px 20px rgb(253, 252, 252);
+
+}
+h2{
+  width: 400px;
+  height: auto;
+}
+
+.islandarea {
+  display: flex;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.island-img {
+  display: block;
+  width: 450px;
+  height: 100%;
+
+}
+
+.house-icon {
+  position: absolute;
+  top: 20%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+
+.museum-icon {
+  position: absolute;
+  top: 35%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+
+.newpost-btn {
+  display: inline-block;
+  position: absolute;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #a78bfa, #f472b6);
+  border-radius: 30px;
+  padding: 12px 25px;
+  transform: translateY(-3px);
+  transition: 0.3s;
+}
+
+
+.subcon{
+  margin-left: 30px;
+}
+
+.toukou{
+  display: flex;
+  margin: 30px 0 0 0;
+  width: 350px;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+.toukou img {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+
+
+
+
+

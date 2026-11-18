@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+body{
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(135deg, #fceaff, #e0f7ff);
+  overflow-x: hidden;
+}
+
+.atelier{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title{
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.post-card{
+  background: white;
+  padding: 45px;
+  width: 600px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.post-card::before{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #ffb6f9, #a0e7ff);
+  top: 10px;
+  left: 10px;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.upload-area{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border: 3px dashed #caa9ff;
+  padding: 40px 20px;
+  margin: 0 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-area:hover{
+  background: #f9f0ff;
+  transform: scale(1.03);
+}
+
+.upload-area .icon{
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.upload-area p{
+  display: inline-block;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  white-space: nowrap;
+
+}
+
+.upload-area .sub{
+  font-size: 13px;
+  color: #888;
+}
+
+.post-btn{
+  margin-top: 25px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 40px;
+  border: none;
+  background: linear-gradient(45deg, #ff9bd2, #8ec5ff);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.post-btn:hover{
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.back-link{
+  margin-top: 25px;
+  text-decoration: none;
+  color: #777;
+}

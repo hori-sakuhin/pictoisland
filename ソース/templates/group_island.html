@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ホーム｜PictoIsland</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/group_island.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="home">
+
+    <!-- サイドバー -->
+    <aside class="sidebar">
+      <h2 class="logo">PictoIsland</h2>
+
+      <nav class="icon">
+        <a href="{{ url_for('home_page') }}"><i class="fa-solid fa-house"></i></a>
+        <a href="{{ url_for('search_page') }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="{{ url_for('group_page') }}"><i class="fa-solid fa-users"></i></a>
+        <a href="{{ url_for('prof', user_id=session['user_id']) }}"><i class="fa-regular fa-user"></i></a>
+      </nav>
+    </aside>
+
+    <main>
+
+      <section class="topcon">
+
+        <div class="Islandname">
+          <h1>{{ group.group_name }}</h1>
+        </div>
+        <div class="groupinfo">
+            {% if today_posts %}
+                {% for post in today_posts %}
+                    <div class="alert">
+                        🔔 {{ post.username }} が新しい投稿をしました
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>お知らせはありません</p>
+            {% endif %}
+        </div>
+
+
+      </section>
+
+      <section class="undercon">
+
+        <div class="island">
+
+          <a href="{{ url_for('group_museum', group_id=group.id) }}" class="museum-icon">
+              <img src="{{ url_for('static', filename='images/museum.png') }}" width="80">
+          </a>
+
+
+            {% if group.island_image %}
+                <img src="{{ url_for('static', filename=group.island_image) }}" class="island-img">
+            {% else %}
+                <img src="{{ url_for('static', filename='images/default_island.png') }}" class="island-img">
+            {% endif %}
+
+          <div class="houses">
+            {% for m in members %}
+            <div class="house-wrapper">
+
+                <a href="{{ url_for('prof', user_id=m.id, from_group=group.id) }}">
+                    <img src="{{ url_for('static',
+                        filename=m.house_image if m.house_image else 'images/house1.png') }}"
+                        class="house-icon">
+                </a>
+
+                <div class="house-name">
+                    {{ m.username }}
+                </div>
+
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="usernav">
+
+          <p class="member-title">グループメンバー</p>
+
+          <div class="member-list">
+            {% for m in members %}
+              <div class="member-item">
+                <span class="member-name">{{ m.username }}</span>
+
+                {% if session.get("user_id") == m.id %}
+                  <form method="POST"
+                        action="{{ url_for('remove_group_member',
+                                          group_id=group.id,
+                                          user_id=m.id) }}">
+                    <button type="submit" class="leave-btn">抜ける</button>
+                  </form>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+
+          <form method="POST"
+                action="{{ url_for('add_group_member', group_id=group.id) }}"
+                class="add-form">
+            <input type="text" name="username" placeholder="フォロー中のユーザー名">
+            <button type="submit" class="magic-btn small">追加</button>
+          </form>
+
+          <a href="{{ url_for('group_museum', group_id=group.id) }}" class="magic-btn">美術館</a>
+
+          <button type="button" class="magic-btn"
+                  onclick="toggleIsland()">
+            島のビジュアル
+          </button>
+
+        </div>
+
+        <div id="islandSelect" style="display:none; margin-top:20px;">
+
+          <form id="bizyu" method="POST" action="/group/{{ group.id }}">
+
+              <label>
+                  <input type="radio" name="island" value="islands/island1.png" required>
+                  <img src="{{ url_for('static', filename='islands/island1.png') }}" width="120">
+              </label>
+
+              <label>
+                  <input type="radio" name="island" value="islands/island2.png">
+                  <img src="{{ url_for('static', filename='islands/island2.png') }}" width="120">
+              </label>
+
+              <label>
+                  <input type="radio" name="island" value="islands/island3.png">
+                  <img src="{{ url_for('static', filename='islands/island3.png') }}" width="120">
+              </label>
+
+              <br><br>
+              <button type="submit" class="btn">保存</button>
+
+          </form>
+        </div>
+
+
+
+
+      </section>
+
+    </main>
+
+
+
+
+  </div>
+
+</body>
+</html>
+
+
+<script>
+function toggleIsland() {
+    const box = document.getElementById("islandSelect");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
+</script>

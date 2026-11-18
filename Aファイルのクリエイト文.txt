@@ -1,0 +1,77 @@
+CREATE DATABASE IF NOT EXISTS pictoisland3
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+ 
+USE pictoisland3;
+ 
+CREATE TABLE accountdata (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    is_public TINYINT(1) NOT NULL DEFAULT 1,
+    comment TEXT,
+    island_name VARCHAR(100),
+    island_theme VARCHAR(100),
+    house_image VARCHAR(255),
+    island_image VARCHAR(255),
+    icon_path VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+ 
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES accountdata(id)
+        ON DELETE CASCADE
+);
+ 
+CREATE TABLE follows (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    follower_id INT NOT NULL,
+    followed_id INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (follower_id) REFERENCES accountdata(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (followed_id) REFERENCES accountdata(id)
+        ON DELETE CASCADE,
+    UNIQUE (follower_id, followed_id)
+);
+ 
+CREATE TABLE usergroups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_name VARCHAR(100) NOT NULL,
+    island_image VARCHAR(255),
+    created_by INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (created_by)
+        REFERENCES accountdata(id)
+        ON DELETE CASCADE
+);
+ 
+CREATE TABLE group_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES usergroups(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES accountdata(id)
+        ON DELETE CASCADE,
+    UNIQUE (group_id, user_id)
+);
+ 
+CREATE TABLE group_posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT NOT NULL,
+    user_id INT NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    comment TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (group_id) REFERENCES usergroups(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES accountdata(id)
+        ON DELETE CASCADE
+);

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>グループ作成</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/group_create.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<body>
+    <main>
+        <h1>グループ作成</h1>
+
+        <form method="POST">
+            <input type="text" name="group_name" placeholder="島名">
+
+            <h3>島のビジュアル</h3>
+
+            <label>
+                <input type="radio" name="island" value="islands/island1.png" required>
+                <img src="{{ url_for('static', filename='islands/island1.png') }}" width="120">
+            </label>
+
+            <label>
+                <input type="radio" name="island" value="islands/island2.png">
+                <img src="{{ url_for('static', filename='islands/island2.png') }}" width="120">
+            </label>
+
+            <label>
+                <input type="radio" name="island" value="islands/island3.png">
+                <img src="{{ url_for('static', filename='islands/island3.png') }}" width="120">
+            </label>
+
+            <br><br>
+            <div class="btn">
+                <a href="{{ url_for('group_page') }}" class="back">← 選択画面へ戻る</a>
+                <button type="submit">作成する</button>
+            </div>
+        </form>
+
+    </main>
+</body>

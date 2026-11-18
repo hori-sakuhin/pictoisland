@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美術館</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/museum.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <div id="title">
+        <h2>美術館</h2>
+    </div>
+    
+{% if post %}
+    <div style="display:flex; align-items:center; justify-content:center;">
+
+        {% if offset + 1 < total %}
+            <a class="arrow"
+               href="{{ url_for('museum_page', offset=offset+1) }}">
+               ◀
+            </a>
+        {% else %}
+            <span class="arrow disabled">◀</span>
+        {% endif %}
+            <div class="museum-container">
+                <div class="museum-frame">
+                    <img src="{{ url_for('static', filename=post.image_path) }}"
+                        class="museum-img">
+                </div>
+                <p class="museum-date">
+                    {{ post.created_at.strftime('%Y/%m/%d') }}
+                </p>
+            </div>
+
+
+        {% if offset > 0 %}
+            <a class="arrow"
+               href="{{ url_for('museum_page', offset=offset-1) }}">
+               ▶
+            </a>
+        {% else %}
+            <span class="arrow disabled">▶</span>
+        {% endif %}
+
+    </div>
+
+{% else %}
+    <p>投稿がありません</p>
+{% endif %}
+    <div class="homehe">
+        <a href="{{ url_for('home_page') }}">←ホームへ</a>
+    </div>
+
+</body>
+</html>

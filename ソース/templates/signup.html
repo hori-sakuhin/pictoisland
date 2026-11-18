@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>アカウント作成｜PictoIsland</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  
+    <div class="a-name">
+      <h2>アカウント作成</h2>
+
+      <form method="post">
+        <label>
+          ユーザー名
+          <input
+            type="text"
+            name="username"
+            class="simei"
+            placeholder="例：pictouser">
+        </label>
+
+        <label>
+          メールアドレス
+          <input
+            type="email"
+            name="email"
+            class="mail"
+            placeholder="example@mail.com"
+            required>
+        </label>
+
+        <label>
+          パスワード
+          <input
+            type="password"
+            name="password"
+            required>
+        </label>
+
+        <a href="{{ url_for('home_page') }}"><button type="submit" class="sakuseibtn">
+          作成する
+        </button></a>
+      </form>
+      <a href="{{ url_for('index_page') }}" class="back">← 戻る</a>
+
+    </div>
+
+</body>
+</html>

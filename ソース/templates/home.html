@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ホーム｜PictoIsland</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="home">
+
+    <aside class="sidebar">
+      <h2 class="logo">PictoIsland</h2>
+
+      <nav class="icon">
+        <a href="{{ url_for('home_page') }}"><i class="fa-solid fa-house"></i></a>
+        <a href="{{ url_for('search_page') }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="{{ url_for('group_page') }}"><i class="fa-solid fa-users"></i></a>
+        <a href="{{ url_for('prof', user_id=session['user_id']) }}"><i class="fa-regular fa-user"></i></a>
+      </nav>
+    </aside>
+
+
+    
+
+    <main>
+
+
+
+      <section class="maincon">
+        <h1>{{ user.island_name }}島</h1>
+        <h2>#{{ user.island_theme }}</h2>
+
+        <div class="islandarea">
+
+          {% if island_image %}
+              <img src="{{ url_for('static', filename=island_image) }}" class="island-img">
+          {% else %}
+              <img src="{{ url_for('static', filename='images/default_island.png') }}" class="island-img">
+          {% endif %}
+
+          <a href="{{ url_for('house_page') }}" class="house-icon">
+            <img src="{{ url_for('static',
+                filename=house_image if house_image else 'images/house1.png') }}"
+                class="house-icon" width="130">
+          </a>
+
+
+          <a href="{{ url_for('museum_page') }}" class="museum-icon">
+              <img src="{{ url_for('static', filename='images/museum.png') }}" width="80">
+          </a>
+
+        </div>
+
+
+        <div class="newpost">
+          {% if request.args.get("from_group") %}
+              <a href="{{ url_for('group_island',
+                  group_id=request.args.get('from_group')) }}"
+                class="newpost-btn">← グループ島へ戻る</a>
+
+          {% elif request.args.get("user_id") %}
+              <a href="/search" class="newpost-btn">← 検索画面へ戻る</a>
+
+          {% else %}
+              <a href="/newpost" class="newpost-btn">新規投稿</a>
+          {% endif %}
+        </div>
+
+
+      </section>
+
+
+      <section class="subcon">
+
+        <div class="kyounotoukou">
+          <p>今日の投稿</p>
+          <div class="toukou">
+              {% if post and post['image_path'] %}
+                  <img src="{{ url_for('static', filename=post['image_path']) }}" class="today-img">
+              {% else %}
+                  <div class="no-post">今日の投稿はまだありません</div>
+              {% endif %}
+          </div>
+        </div>
+
+        <div class="usernav">
+          <a href="{{ url_for('house_page') }}"></i>家へ</a>
+          <a href="{{ url_for('museum_page') }}"></i>美術館へ</a>
+          <h2 class="bizyubutton" onclick="toggleIsland()">島のビジュアル変更</h2>
+        </div>
+
+        <div id="islandSelect" style="display:none; margin-top:20px;">
+
+          <form id="bizyu" method="POST">
+
+              <label>
+                  <input type="radio" name="island" value="islands/island1.png" required>
+                  <img src="{{ url_for('static', filename='islands/island1.png') }}" width="120">
+              </label>
+
+              <label>
+                  <input type="radio" name="island" value="islands/island2.png">
+                  <img src="{{ url_for('static', filename='islands/island2.png') }}" width="120">
+              </label>
+
+              <label>
+                  <input type="radio" name="island" value="islands/island3.png">
+                  <img src="{{ url_for('static', filename='islands/island3.png') }}" width="120">
+              </label>
+
+              <br><br>
+              <button type="submit">保存</button>
+
+          </form>
+        </div>
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+
+<script>
+function toggleIsland() {
+    const box = document.getElementById("islandSelect");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
+</script>
+
+</html>
+
+
+
