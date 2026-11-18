@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS pictoisland3
+CREATE DATABASE IF NOT EXISTS pictoisland
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci;
  
-USE pictoisland3;
+USE pictoisland;
  
 CREATE TABLE accountdata (
     id INT AUTO_INCREMENT PRIMARY KEY,

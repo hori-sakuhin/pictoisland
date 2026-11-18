@@ -23,8 +23,8 @@ if not os.path.exists(UPLOAD_FOLDER):
 def get_db():
     return mysql.connector.connect(
         host="localhost",
-        user="root",
-        password="root",
+        user="your database account",
+        password="your database password",
         database="pictoisland"
     )
 
